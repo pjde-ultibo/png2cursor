@@ -42,7 +42,7 @@ type
 
 implementation
 
-uses uLog, FPImage, FPReadPNG, FPReadGIF, FPReadBMP, Platform, GlobalConst, HeapManager;
+uses uLog, FPImage, FPReadPNG, FPReadGIF, FPReadBMP, Platform, GlobalConst;
 
 //const
 //  du : array [boolean] of string = ('DOWN', 'UP');
@@ -110,7 +110,6 @@ begin
   CursorX := x;
   CursorY := y;
   for i := 1 to 6 do Buttons[i] := false;
-
   Start;
 end;
 
@@ -140,7 +139,7 @@ begin
     if (im.Width > 0) and (im.Height > 0) then
       begin
         Size := im.Width * im.Height * 4;
-        Cursor := AllocNoCacheMem (Size);
+        Cursor := AllocMem (Size);
         if Cursor <> nil then
           begin
             for i := 0 to im.Width - 1do
