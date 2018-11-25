@@ -16,7 +16,7 @@ uses
   Threads,
   SysUtils,
   Classes,
-  Console, uLog,
+  Console, uLog, FrameBuffer,
 {$ifdef use_tftp}
   uTFTP, Winsock2,
 {$endif}
@@ -99,7 +99,7 @@ begin
   Console2 := ConsoleWindowCreate (ConsoleDeviceGetDefault, CONSOLE_POSITION_TOPRIGHT, false);
   Console3 := ConsoleWindowCreate (ConsoleDeviceGetDefault, CONSOLE_POSITION_BOTTOMRIGHT, false);
   SetLogProc (@Log1);
-  Log1 ('Mouse / Cursor Test.');
+  Log1 ('Mouse / Cursor Test (New  API).');
   WaitForSDDrive;
   Log1 ('SD Drive Ready.');
 
@@ -110,7 +110,7 @@ begin
 {$endif}
 
   ch := #0;
-  MouseThread := TMouseThread.Create (0, 0);
+  MouseThread := TMouseThread.Create (FramebufferDeviceGetDefault, 0, 0);
   MouseThread.LoadCursor ('cursor-32.png');
   MouseThread.OnMouseDown := @DoMouseDown;
   MouseThread.OnMouseUp := @DoMouseUp;
